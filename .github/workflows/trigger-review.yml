@@ -12,11 +12,17 @@ jobs:
     steps:
       - name: Trigger External Review Engine
         run: |
-          curl -X POST https://review-engine.onrender.com/review \
+          echo "===== CALLING REVIEW ENGINE ====="
+
+          RESPONSE=$(curl -s -X POST https://review-engine.onrender.com/review \
           -H "Content-Type: application/json" \
           -d '{
             "repository": "${{ github.repository }}",
             "branch": "${{ github.ref_name }}",
             "commit_sha": "${{ github.sha }}",
             "author": "${{ github.actor }}"
-          }'
+          }')
+
+          echo "===== REVIEW ENGINE RESPONSE ====="
+          echo "$RESPONSE"
+          echo "=================================="
