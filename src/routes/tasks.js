@@ -19,6 +19,15 @@ router.post("/", (req, res) => {
   res.status(201).json(task);
 });
 
+// router.delete("/:id", (req, res) => {
+//   res.send("Task deleted");
+// });
+// router.delete("/:id", (req, res) => {
+//   res.send("Task deleted");
+// });
+// router.delete("/:id", (req, res) => {
+//   res.send("Task deleted");
+// });
 router.delete("/:id", (req, res) => {
   res.send("Task deleted");
 });
