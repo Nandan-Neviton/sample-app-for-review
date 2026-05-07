@@ -21,3 +21,20 @@ dasas
 asdas
 asdasdasd
 asd
+
+
+
+
+
+
+The code logs link is in:
+https://dashboard.render.com/web/srv-d7tda8a8qa3s73c133tg/logs?r=live
+
+Code is hosted on:
+https://review-engine.onrender.com
+
+Push in this code to see the changes
+
+Review engine repo contains all the code review code
+
+Run the frontend on the review engine repo which will show the frontend code.
