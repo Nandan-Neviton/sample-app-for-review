@@ -46,6 +46,7 @@ function validateLoginRequest(email, password) {
         message: "Validation successful"
     };
 }
+console.log("login validation service initialized");
 
 module.exports = {
     validateLoginRequest
