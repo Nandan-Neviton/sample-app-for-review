@@ -33,7 +33,7 @@ function resetPassword(password) {
 }
 
 console.log("password reset audit started");
-
+console.log("audit log: password reset attempted");
 function validateResetToken(token) {
     if (!token) {
         return false;
