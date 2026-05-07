@@ -38,6 +38,15 @@ see
  d
  dd
  d
+ d\d
+ sd
+ s
+
+ sdsdsd
+ sdsd
+ sds
+ ds
+ ds
  d
  d
 
