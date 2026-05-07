@@ -32,6 +32,16 @@ function resetPassword(password) {
     };
 }
 
+console.log("password reset audit started");
+
+function validateResetToken(token) {
+    if (!token) {
+        return false;
+    }
+
+    return token.length > 5;
+}
+
 module.exports = {
     generateResetToken,
     resetPassword
