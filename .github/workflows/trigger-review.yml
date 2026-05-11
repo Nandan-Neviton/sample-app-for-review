@@ -9,7 +9,6 @@ jobs:
 governance-trigger:
 runs-on: ubuntu-latest
 
-```
 steps:
   - name: Trigger Governance Review
     run: |
