@@ -1,29 +1,31 @@
-name: Trigger Review Pipeline
+name: Trigger Governance Pipeline
 
 on:
-  push:
-    branches:
-      - "**"
+push:
+branches:
+- "**"
 
 jobs:
-  governance-trigger:
-    runs-on: ubuntu-latest
+governance-trigger:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Trigger Governance Review
-        run: |
-          echo "===== CALLING GOVERNANCE ENGINE ====="
+```
+steps:
+  - name: Trigger Governance Review
+    run: |
+      echo "===== CALLING GOVERNANCE ENGINE ====="
 
-          RESPONSE=$(curl -s -X POST https://review-engine.onrender.com/governance/webhook \ 
-          -H "Content-Type: application/json" \ 
-          -d '{
-            "repository": "${{ github.repository }}", 
-            "branch": "${{ github.ref_name }}", 
-            "commit_sha": "${{ github.sha }}", 
-            "author": "${{ github.actor }}", 
-            "commit_message": "${{ github.event.head_commit.message }}"
-          }')
+      RESPONSE=$(curl -s -X POST "https://review-engine.onrender.com/governance/webhook" \
+        -H "Content-Type: application/json" \
+        -d '{
+          "repository": "${{ github.repository }}",
+          "branch": "${{ github.ref_name }}",
+          "commit_sha": "${{ github.sha }}",
+          "author": "${{ github.actor }}",
+          "commit_message": "${{ github.event.head_commit.message }}"
+        }')
 
-          echo "===== GOVERNANCE RESPONSE ====="
-          echo "$RESPONSE"
-          echo "=================================="
+      echo "===== GOVERNANCE RESPONSE ====="
+      echo "$RESPONSE"
+      echo "=================================="
+```
