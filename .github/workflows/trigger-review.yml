@@ -27,4 +27,3 @@ steps:
       echo "===== GOVERNANCE RESPONSE ====="
       echo "$RESPONSE"
       echo "=================================="
-```
