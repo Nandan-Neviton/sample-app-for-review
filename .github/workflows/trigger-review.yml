@@ -1,4 +1,4 @@
-name: Trigger Governance Pipeline
+name: Trigger Review Pipeline
 
 on:
   push:
@@ -6,24 +6,23 @@ on:
       - "**"
 
 jobs:
-  governance-trigger:
+  review-trigger:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Governance Review
+      - name: Trigger External Review Engine
         run: |
-          echo "===== CALLING GOVERNANCE ENGINE ====="
+          echo "===== CALLING REVIEW ENGINE ====="
 
-          RESPONSE=$(curl -s -X POST "https://review-engine.onrender.com/governance/webhook" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "repository": "${{ github.repository }}",
-              "branch": "${{ github.ref_name }}",
-              "commit_sha": "${{ github.sha }}",
-              "author": "${{ github.actor }}",
-              "commit_message": "${{ github.event.head_commit.message }}"
-            }')
+          RESPONSE=$(curl -s -X POST https://review-engine.onrender.com/review \
+          -H "Content-Type: application/json" \
+          -d '{
+            "repository": "${{ github.repository }}",
+            "branch": "${{ github.ref_name }}",
+            "commit_sha": "${{ github.sha }}",
+            "author": "${{ github.actor }}"
+          }')
 
-          echo "===== GOVERNANCE RESPONSE ====="
+          echo "===== REVIEW ENGINE RESPONSE ====="
           echo "$RESPONSE"
           echo "=================================="
