@@ -3,7 +3,7 @@ function createApiResponse(success, code, message, data = null) {
         success,
         code,
         message,
-        datar
+        data
     };
 }
 
