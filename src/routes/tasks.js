@@ -28,8 +28,5 @@ router.post("/", (req, res) => {
 // router.delete("/:id", (req, res) => {
 //   res.send("Task deleted");
 // });
-router.delete("/:id", (req, res) => {
-  res.send("Task deleted");
-});
 
 module.exports = router;
