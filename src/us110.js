@@ -1,51 +1,64 @@
 import React, { useState } from "react";
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const products = [
+  "iPhone 15",
+  "Samsung Galaxy S24",
+  "MacBook Air",
+  "Sony Headphones",
+  "Dell Monitor"
+];
+
+export default function ProductSearch() {
+  const [keyword, setKeyword] = useState("");
+  const [results, setResults] = useState([]);
   const [message, setMessage] = useState("");
 
-  const handleLogin = () => {
-    if (!email.trim() || !password.trim()) {
-      setMessage("Email and password are required");
+  const handleSearch = () => {
+    const trimmedKeyword = keyword.trim();
+
+    if (!trimmedKeyword) {
+      setMessage("Please enter a search term");
+      setResults([]);
       return;
     }
 
-    // Mock authentication
-    if (email === "test@example.com" && password === "password123") {
-      setMessage("Login successful");
+    const filteredProducts = products.filter((product) =>
+      product.toLowerCase().includes(trimmedKeyword.toLowerCase())
+    );
+
+    setResults(filteredProducts);
+
+    if (filteredProducts.length === 0) {
+      setMessage("No products found");
     } else {
-      setMessage("Invalid credentials");
+      setMessage("");
     }
   };
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Login</h2>
+      <h2>Product Search</h2>
 
       <input
-        type="email"
-        placeholder="Enter email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        type="text"
+        placeholder="Search products"
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
       />
 
-      <br /><br />
-
-      <input
-        type="password"
-        placeholder="Enter password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
-      <br /><br />
-
-      <button onClick={handleLogin}>
-        Login
+      <button onClick={handleSearch} style={{ marginLeft: "10px" }}>
+        Search
       </button>
 
-      <p>{message}</p>
+      <div style={{ marginTop: "20px" }}>
+        {message && <p>{message}</p>}
+
+        <ul>
+          {results.map((product, index) => (
+            <li key={index}>{product}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
