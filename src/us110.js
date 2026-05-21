@@ -1,64 +1,52 @@
 import React, { useState } from "react";
 
-const products = [
-  "iPhone 15",
-  "Samsung Galaxy S24",
-  "MacBook Air",
-  "Sony Headphones",
-  "Dell Monitor"
-];
-
-export default function ProductSearch() {
-  const [keyword, setKeyword] = useState("");
-  const [results, setResults] = useState([]);
+export default function ForgotPassword() {
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSearch = () => {
-    const trimmedKeyword = keyword.trim();
+  const validateEmail = (value) => {
+    return /\S+@\S+\.\S+/.test(value);
+  };
 
-    if (!trimmedKeyword) {
-      setMessage("Please enter a search term");
-      setResults([]);
+  const handleReset = () => {
+    const trimmedEmail = email.trim();
+
+    if (!trimmedEmail) {
+      setMessage("Email is required");
       return;
     }
 
-    const filteredProducts = products.filter((product) =>
-      product.toLowerCase().includes(trimmedKeyword.toLowerCase())
-    );
-
-    setResults(filteredProducts);
-
-    if (filteredProducts.length === 0) {
-      setMessage("No products found");
-    } else {
-      setMessage("");
+    if (!validateEmail(trimmedEmail)) {
+      setMessage("Please enter a valid email address");
+      return;
     }
+
+    // Simulated API call
+    setTimeout(() => {
+      setMessage(
+        "If an account with that email exists, a reset link has been sent."
+      );
+    }, 1000);
   };
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Product Search</h2>
+      <h2>Forgot Password</h2>
 
       <input
-        type="text"
-        placeholder="Search products"
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
+        type="email"
+        placeholder="Enter your email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
 
-      <button onClick={handleSearch} style={{ marginLeft: "10px" }}>
-        Search
+      <br /><br />
+
+      <button onClick={handleReset}>
+        Send Reset Link
       </button>
 
-      <div style={{ marginTop: "20px" }}>
-        {message && <p>{message}</p>}
-
-        <ul>
-          {results.map((product, index) => (
-            <li key={index}>{product}</li>
-          ))}
-        </ul>
-      </div>
+      <p>{message}</p>
     </div>
   );
 }
