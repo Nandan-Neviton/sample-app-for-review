@@ -1,46 +1,51 @@
 import React, { useState } from "react";
 
-export default function App() {
-  const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  const addTask = () => {
-    const trimmedTask = task.trim();
-
-    if (!trimmedTask) {
-      alert("Task cannot be empty");
+  const handleLogin = () => {
+    if (!email.trim() || !password.trim()) {
+      setMessage("Email and password are required");
       return;
     }
 
-    const newTask = {
-      id: Date.now(),
-      name: trimmedTask,
-    };
-
-    setTasks([...tasks, newTask]);
-    setTask("");
+    // Mock authentication
+    if (email === "test@example.com" && password === "password123") {
+      setMessage("Login successful");
+    } else {
+      setMessage("Invalid credentials");
+    }
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>To-Do List</h1>
+    <div style={{ padding: "20px" }}>
+      <h2>Login</h2>
 
       <input
-        type="text"
-        value={task}
-        placeholder="Enter a task"
-        onChange={(e) => setTask(e.target.value)}
+        type="email"
+        placeholder="Enter email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
 
-      <button onClick={addTask} style={{ marginLeft: "10px" }}>
-        Add Task
+      <br /><br />
+
+      <input
+        type="password"
+        placeholder="Enter password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <br /><br />
+
+      <button onClick={handleLogin}>
+        Login
       </button>
 
-      <ul>
-        {tasks.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+      <p>{message}</p>
     </div>
   );
 }
