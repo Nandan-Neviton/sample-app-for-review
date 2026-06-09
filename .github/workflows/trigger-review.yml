@@ -10,19 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger External Review Engine
+      - name: Trigger Governance Review
         run: |
-          echo "===== CALLING REVIEW ENGINE ====="
+          echo "===== CALLING GOVERNANCE ENGINE ====="
 
-          RESPONSE=$(curl -s -X POST https://review-engine.onrender.com/review \
-          -H "Content-Type: application/json" \
-          -d '{
-            "repository": "${{ github.repository }}",
-            "branch": "${{ github.ref_name }}",
-            "commit_sha": "${{ github.sha }}",
-            "author": "${{ github.actor }}"
-          }')
+          RESPONSE=$(curl -s -X POST https://gap-analysis.pivotproduct.com/governance/webhook \
+            -H "Content-Type: application/json" \
+            -H "X-Governance-Secret: ${{ secrets.GOVERNANCE_WEBHOOK_SECRET }}" \
+            -d '{
+              "repository": "${{ github.repository }}",
+              "branch": "${{ github.ref_name }}",
+              "commit_sha": "${{ github.sha }}",
+              "author": "${{ github.actor }}"
+            }')
 
-          echo "===== REVIEW ENGINE RESPONSE ====="
+          echo "===== GOVERNANCE RESPONSE ====="
           echo "$RESPONSE"
-          echo "=================================="
+          echo "=============================="
